@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demo Application</title>
+    <title>React Demo application</title>
+    <script src="index.js" defer></script>
   </head>
   <body>
     <div id="root"></div>
@@ -15,13 +16,5 @@
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
-    <script>
-      //create a element
-      const heading = React.createElement("h1", {}, "Hello World from React!");
-      //create a root
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      //render a element
-      root.render(heading);
-    </script>
   </body>
 </html>
