@@ -1,3 +1,5 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
 const parentElement = React.createElement(
   "div",
   {
@@ -10,5 +12,5 @@ const parentElement = React.createElement(
   )
 );
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
 root.render(parentElement);
