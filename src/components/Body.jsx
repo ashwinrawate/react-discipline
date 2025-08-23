@@ -1,4 +1,5 @@
-import { resList } from "../data";
+import { resList } from "../utils/data";
+import { CDN_URL } from "../utils/constants";
 const BodyComponent = () => {
   return (
     <div className="body">
@@ -17,10 +18,7 @@ const RestaurantCard = ({ restaurant }) => {
   const { cloudinaryImageId, name, avgRating, sla, cuisines } = restaurant;
   return (
     <div className="restaurantCard">
-      <img
-        className="cardImage"
-        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
-      ></img>
+      <img className="cardImage" src={`${CDN_URL}${cloudinaryImageId}`}></img>
       <h3>{name}</h3>
       <div className="ratingsMinutes">
         <h4>⭐{avgRating}</h4>
