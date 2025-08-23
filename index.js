@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { resList } from "./data";
 
 /*
 # Components planned for app
@@ -25,7 +26,6 @@ import { createRoot } from "react-dom/client";
       ii. BodyComponent 
       iii.FooterComponent
 */
-
 const HeaderComponent = () => (
   <div className="header">
     <div className="logo-container">
@@ -45,19 +45,19 @@ const HeaderComponent = () => (
   </div>
 );
 
-const RestaurantCard = () => {
+const RestaurantCard = ({ restaurant }) => {
   return (
     <div className="restaurantCard">
       <img
         className="cardImage"
-        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/1/17/a38d20d7-bbb7-4b67-8bdd-7740e85cd4af_385824.JPG"
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${restaurant.cloudinaryImageId}`}
       ></img>
-      <h3>The Belgian Waffle Co.</h3>
+      <h3>{restaurant.name}</h3>
       <div className="ratingsMinutes">
-        <h4>⭐ 4.6</h4>
-        <h4>38 minutes</h4>
+        <h4>⭐{restaurant.avgRating}</h4>
+        <h4>{restaurant.sla.slaString}</h4>
       </div>
-      <h5>Waffle, Desserts, Ice Cream</h5>
+      <h5>{restaurant.cuisines.join(", ")}</h5>
     </div>
   );
 };
@@ -67,19 +67,9 @@ const BodyComponent = () => {
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
+        {resList.map((res) => (
+          <RestaurantCard key={res.id} restaurant={res}></RestaurantCard>
+        ))}
       </div>
     </div>
   );
