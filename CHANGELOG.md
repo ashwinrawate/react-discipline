@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added index.css
 - Created a first Restaurant card named "The Belgian Waffle Co."
 
-## [1.0.0] - 2025-08-23
+## [1.0.1] - 2025-08-23
 ### Added
 - Add: Dyanmic data for Food delivey app Swiggy (data.js) 
 - Dynamic creation of Restaurant card (index.js)
