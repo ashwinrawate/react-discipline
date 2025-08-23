@@ -1,18 +1,18 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-// const parentElement = React.createElement(
-//   "div",
-//   {
-//     id: "parent",
-//   },
-//   React.createElement(
-//     "div",
-//     { id: "child" },
-//     React.createElement("h1", {}, "Hi from child Element")
-//   )
-// );/
+//react component
+const TitleComponent = () => (
+  <div>
+    <h1>Namaste Ashwin</h1>
+  </div>
+);
 
-const jsxElement = <h1 id="heading">I am inside JSX element</h1>;
+const HeadingComponent = () => (
+  <>
+    <TitleComponent />
+    <div>Hi</div>
+  </>
+);
 
 const root = createRoot(document.getElementById("root"));
-root.render(jsxElement);
+root.render(<HeadingComponent />);
