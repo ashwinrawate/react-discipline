@@ -1,30 +1,67 @@
-import { resList } from "../utils/data";
-import { CDN_URL } from "../utils/constants";
+// demo data
+// import { resList } from "../utils/data";
+import RestaurantCard from "./RestaurantCard";
+import { useEffect, useState } from "react";
+import SimmerComponent from "./Shimmer";
+
 const BodyComponent = () => {
-  return (
+  //PowerFull State Variable
+  let [restaurantList, setRestaurantList] = useState([]);
+  let [searchText, setSearchText] = useState("");
+
+  const fetchData = async () => {
+    const apiData = await fetch(
+      "https://raw.githubusercontent.com/namastedev/namaste-react/refs/heads/main/swiggy-api"
+    );
+    const dataJson = await apiData.json();
+    const apiResList =
+      dataJson?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    setRestaurantList(apiResList.map((res) => res.info));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return restaurantList.length === 0 ? (
+    <SimmerComponent />
+  ) : (
     <div className="body">
-      <div className="search">Search</div>
+      <button
+        className="filter-btn"
+        onClick={() => {
+          restaurantList = restaurantList.filter((res) => res.avgRating > 4.3);
+          setRestaurantList(restaurantList);
+        }}
+      >
+        Top Rated Restaurant
+      </button>
+
+      <div className="search-container">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        ></input>
+        <button
+          onClick={() => {
+            const filterRes = restaurantList.filter((res) => {
+              return res.name.toLowerCase().includes(searchText.toLowerCase());
+            });
+            setRestaurantList(filterRes);
+          }}
+        >
+          Submit
+        </button>
+      </div>
       <div className="res-container">
-        {resList.map((res) => (
+        {restaurantList.map((res) => (
           <RestaurantCard key={res.id} restaurant={res}></RestaurantCard>
         ))}
       </div>
-    </div>
-  );
-};
-
-const RestaurantCard = ({ restaurant }) => {
-  //Destructuring
-  const { cloudinaryImageId, name, avgRating, sla, cuisines } = restaurant;
-  return (
-    <div className="restaurantCard">
-      <img className="cardImage" src={`${CDN_URL}${cloudinaryImageId}`}></img>
-      <h3>{name}</h3>
-      <div className="ratingsMinutes">
-        <h4>⭐{avgRating}</h4>
-        <h4>{sla.slaString}</h4>
-      </div>
-      <h5>{cuisines.join(", ")}</h5>
     </div>
   );
 };
