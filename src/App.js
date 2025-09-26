@@ -5,6 +5,8 @@ import FooterComponent from "./components/Footer";
 import Contact from "./components/Contact";
 import Error from "../src/components/Error";
 import About from "../src/components/About";
+import RestaurementMenu from "./components/RestaurementMenu";
+import ClassBasedComponent from "./components/ClassbasedComponent";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
@@ -12,6 +14,7 @@ const AppLayout = () => {
     <div className="app">
       <HeaderComponent />
       <Outlet />
+      <ClassBasedComponent address={"Props from applayout"} />
     </div>
   );
 };
@@ -20,26 +23,13 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
-      {
-        path: "/",
-        element: <BodyComponent />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
+      { path: "/", element: <BodyComponent /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/about", element: <About /> },
+      { path: "/restaurants/:resId", element: <RestaurementMenu /> },
     ],
-    error: <Error />,
-  },
-
-  {
-    path: "/contact",
-    element: <Contact />,
   },
 ]);
 
